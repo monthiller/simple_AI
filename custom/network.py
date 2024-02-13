@@ -218,20 +218,20 @@ class Network:
     plt.figsize=(10, 5)
     plt.show()
     
-def draw_network(self):
-        graph = nx.DiGraph()
+  def draw_network(self):
+    graph = nx.DiGraph()
 
-        # Add neurons as nodes
-        for neuron in self.neurons:
-            graph.add_node(neuron.name)
+    # Add neurons as nodes
+    for neuron in self.neurons:
+        graph.add_node(neuron.name)
 
-        # Add connections as edges
-        for neuron1, neuron2 in self.connections:
-            graph.add_edge(neuron1.name, neuron2.name)
+    # Add connections as edges
+    for neuron1, neuron2 in self.connections:
+        graph.add_edge(neuron1.name, neuron2.name)
 
-        # Set layout and draw the network
-        pos = nx.spring_layout(graph)
-        plt.figure(figsize=(12, 8))
-        nx.draw(graph, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
-        plt.title("Neural Network Architecture")
-        plt.show()
+    # Set layout and draw the network
+    pos = nx.spring_layout(graph)
+    plt.figure(figsize=(12, 8))
+    nx.draw(graph, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
+    plt.title("Neural Network Architecture")
+    plt.show()
