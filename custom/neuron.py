@@ -3,13 +3,9 @@ import matplotlib.pyplot as plt
 import math
 import random
 import numpy as np
-from scipy.special import expit
 
 dot = np.dot
-_sigmoid  = expit
 
-def _d_sigmoid( x):
-  return _sigmoid(x)*(1-_sigmoid(x))
 
 # Neuron class
 class Neuron:
