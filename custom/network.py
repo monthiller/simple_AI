@@ -233,7 +233,7 @@ class Network:
 
     # Set layout and draw the network
     pos = nx.spring_layout(graph)
-    plt.figure(figsize=(12, 8))
+    # plt.figure(figsize=(12, 8))
     nx.draw(graph, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
     plt.title("Neural Network Architecture")
     plt.show()
