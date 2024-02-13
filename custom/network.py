@@ -27,6 +27,7 @@ class Network:
     self._init_neurons(*kwargs["neurons"])
     self._init_inputs(*kwargs["inputs"])
     self._init_outputs(*kwargs["outputs"])
+    self._init_connections(*kwargs["connections"])
 
   def _init_neurons(self, *args):
     for params in args:
