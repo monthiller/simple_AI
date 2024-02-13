@@ -29,7 +29,7 @@ class Network:
     self._init_outputs(*kwargs["outputs"])
 
   def _init_neurons(self, *args):
-    for param in args:
+    for params in args:
       neuron = Neuron(**params)
       self.neurons.add(neuron)
 
