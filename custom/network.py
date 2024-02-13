@@ -24,7 +24,7 @@ class Network:
     self.exercice_errors = []
     self.connections = []
 
-    self._init_neuron(*kwargs["neurons"])
+    self._init_neurons(*kwargs["neurons"])
     self._init_inputs(*kwargs["inputs"])
     self._init_outputs(*kwargs["outputs"])
 
