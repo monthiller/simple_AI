@@ -16,12 +16,14 @@ class Network:
     self.neurons = set(kwargs["neurons"])
     self.errors = list()
     self._neuron_dict = {}
-    self.connections = []
     self.ready = False
     self.name = name
     self.predicted = None
     self.training = kwargs["training"]
     self.exercice_errors = []
+    self.connections = []
+    for origin, destination in kwargs["connections"]:
+      self.connect(origin, destination)
 
   def __str__(self):
     return f"network {self.name}"
