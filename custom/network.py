@@ -204,7 +204,7 @@ class Network:
     axs[0].plot(x, y, label='target')
 
     x = [i/10 for i in range(-10, 250)]
-    y = [network.predict([i]) for i in x]
+    y = [self.predict([i]) for i in x]
     print(max(y))
     axs[0].plot(x, y, label='predicted')
 
