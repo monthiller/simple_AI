@@ -1,4 +1,5 @@
 # Imports
+from .neuron import Neuron
 import matplotlib.pyplot as plt
 import math
 import random
@@ -8,12 +9,12 @@ import networkx as nx
 
 class Network:
   def __init__(self, name, **kwargs):
-    self.input_layer = list(kwargs["inputs"])
-    self.output_layer = list(kwargs["outputs"])
+    self.neurons = set()
+    self.input_layer = list()
+    self.output_layer = list()
     self.inputs = None
     self._target = None
     self.learning_rate = 0.1
-    self.neurons = set(kwargs["neurons"])
     self.errors = list()
     self._neuron_dict = {}
     self.ready = False
@@ -22,7 +23,26 @@ class Network:
     self.training = kwargs["training"]
     self.exercice_errors = []
     self.connections = []
-    for origin, destination in kwargs["connections"]:
+
+    self._init_neuron(*kwargs["neurons"])
+    self._init_inputs(*kwargs["inputs"])
+    self._init_outputs(*kwargs["outputs"])
+
+  def _init_neurons(self, *args):
+    for param in args:
+      neuron = Neuron(**params)
+      self.neurons.add(neuron)
+
+  def _init_inputs(self, *args):
+    for name in args:
+      self.input_layer.append(self._neuron_dict[name])
+
+  def _init_outputs(self, *args):
+    for name in args:
+      self.output_layer.append(self._neuron_dict[name])
+
+  def _init_connections(self, *args):
+    for origin, destination in args:
       self.connect(origin, destination)
 
   def __str__(self):
