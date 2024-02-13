@@ -55,6 +55,7 @@ class Network:
     return self._neuron_dict[key]
 
   def add_neuron(self, neuron):
+    self.neurons.add(neuron)
     if neuron.name in self._neuron_dict:
       assert neuron is self._neuron_dict[neuron.name]
       return
