@@ -137,12 +137,3 @@ class Neuron:
     plt.ylabel("y")
     plt.grid(True)
     plt.show()
-
-params = {
-    "weights": [1],
-    "bias": 0,
-    "activation":_sigmoid,
-    "derivative activation":_d_sigmoid,
-}
-neuron0 = Neuron(0, **params)
-neuron0.plot()
