@@ -14,3 +14,4 @@ def light_on_after_12():
     dataset["inputs"].append([input,])
     dataset["outputs"].append([1])
     dataset["tolerance"].append([0.6, 1])
+  return dataset
