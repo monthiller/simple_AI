@@ -44,6 +44,8 @@ class Network:
 
   def _init_connections(self, *args):
     for origin, destination in args:
+      origin = self._neuron_dict[origin]
+      destination = self._neuron_dict[destination]
       self.connect(origin, destination)
 
   def __str__(self):
