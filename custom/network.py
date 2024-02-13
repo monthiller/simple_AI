@@ -196,7 +196,7 @@ class Network:
 
   def plot(self):
     fig, axs = plt.subplots(nrows=2, ncols=1)
-    axs[0].set_title(f"Trained for {len(self.errors)} repetitions, with {network.learning_rate} learning rate.")
+    axs[0].set_title(f"Trained for {len(self.errors)} repetitions, with {self.learning_rate} learning rate.")
     axs[0].grid(True)
 
     x = [x[0] for x in self.training["inputs"]]
