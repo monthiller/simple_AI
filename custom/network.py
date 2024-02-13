@@ -221,19 +221,36 @@ class Network:
     plt.show()
     
   def draw_network(self):
-    graph = nx.DiGraph()
+    G = nx.DiGraph()
 
     # Add neurons as nodes
     for neuron in self.neurons:
-        graph.add_node(neuron.name)
+        G.add_node(neuron.name)
 
     # Add connections as edges
     for neuron1, neuron2 in self.connections:
-        graph.add_edge(neuron1.name, neuron2.name)
+        G.add_edge(neuron1.name, neuron2.name)
 
-    # Set layout and draw the network
-    pos = nx.spring_layout(graph)
-    # plt.figure(figsize=(12, 8))
-    nx.draw(graph, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
+    # Create a position dictionary for nodes
+    pos = {}
+
+    # Assign positions for input layer nodes on the left
+    input_layer_nodes = self.input_layer
+    y_position = 0
+    for neuron in input_layer_nodes:
+        pos[neuron.name] = (0, y_position)
+        y_position += 1
+
+    # Assign positions for other neurons
+    other_neurons = [neuron for neuron in self.neurons if neuron not in input_layer_nodes]
+    num_other_neurons = len(other_neurons)
+    y_position = num_other_neurons // 2
+    for neuron in other_neurons:
+        pos[neuron.name] = (1, y_position)
+        y_position -= 1
+
+    # Draw the network
+    plt.figure(figsize=(12, 8))
+    nx.draw(G, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
     plt.title("Neural Network Architecture")
     plt.show()
