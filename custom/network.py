@@ -31,7 +31,7 @@ class Network:
   def _init_neurons(self, *args):
     for params in args:
       neuron = Neuron(**params)
-      self.neurons.add(neuron)
+      self.add_neuron(neuron)
 
   def _init_inputs(self, *args):
     for name in args:
