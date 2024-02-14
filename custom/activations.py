@@ -2,7 +2,7 @@ from scipy.special import expit
   
 class ActivationInterface:
   @property
-  def name(values):
+  def name(self):
     assert self._name is not None
     return self._name
     
