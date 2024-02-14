@@ -209,8 +209,8 @@ class Network:
   def train(self, repetitions, exercices=None):
     exercices = exercices or {} 
     exercices.update(self.exercices)
-    assert exercices
     inputs = exercices["inputs"]
+    assert inputs
     targets = exercices["outputs"]
     tolerances = exercices["tolerance"]
 
