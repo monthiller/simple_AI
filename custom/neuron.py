@@ -11,7 +11,7 @@ dot = np.dot
 # Neuron class
 class Neuron:
   _activations = {
-    "sigmoid": activation.sigmoid
+    "sigmoid": activations.sigmoid
   }
   def __init__(self, name, **kwargs):
     self.name = name
