@@ -26,4 +26,4 @@ class Sigmoid(ActivationInterface):
     return expit(values)
   
   def deriv(self, values):
-    return self.calc(x)*(1-self.calc(x))
+    return self.calc(values)*(1-self.calc(values))
