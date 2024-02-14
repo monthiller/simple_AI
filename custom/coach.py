@@ -93,9 +93,6 @@ class Coach:
       # self.team.sort(key=lambda network: network.errors[-1])
 
       if self.first:
-
-        print(f"Tolerance achieved with {len(self.first.errors)} exercice sessions!")
-        print(f"A solution was found after {i+1} selections! Network has a learning rate of {self.first.learning_rate}")
         self.sessions_to_tolerance = i
         break
 
@@ -105,6 +102,11 @@ class Coach:
     return [self.first] + self.team[:2]
 
   def plot(self):
+    if self.first:
+      print(f"A solution was found after {i+1} selections!")
+      print(f"Solution was trained for {len(self.first.errors)} exercice sessions of {self.sessions_size} repetitions.")
+      print(f"Solution has a learning rate of {self.first.learning_rate}.")
+    
     podium = self.get_podium()
     for place, network in enumerate(podium):
         plt.plot(network.errors, label=f'{place+1}, lr={network.learning_rate}')
