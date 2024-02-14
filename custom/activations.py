@@ -2,9 +2,10 @@ from scipy.special import expit
   
 class ActivationInterface:
   @property
-  def name(self):
-    assert self._name is not None
-    return self._name
+  @classmethod
+  def name(cls):
+    assert cls._name is not None
+    return cls._name
     
   def calc(self, values):
     raise NotImplementedError
@@ -12,8 +13,7 @@ class ActivationInterface:
     raise NotImplementedError
     
 class Sigmoid(ActivationInterface):
-  def __init__(self):
-    self._name = "sigmoid"
+  _name = "sigmoid"
   
   @staticmethod
   def calc(values):
