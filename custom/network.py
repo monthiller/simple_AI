@@ -20,7 +20,7 @@ class Network:
     self.ready = False
     self.name = name
     self.predicted = None
-    self.training = kwargs["training"]
+    self.exercices = kwargs.get("exercices", {})
     self.exercice_errors = []
     self.connections = []
 
@@ -183,11 +183,13 @@ class Network:
     # correct the weights and bias
     self.correct()
 
-  def train(self, repetitions):
-    training = self.training
-    inputs = training["inputs"]
-    targets = training["outputs"]
-    tolerances = training["tolerance"]
+  def train(self, repetitions, exercices=None):
+    exercices = exercices or {} 
+    exercices.update(self.exercices)
+    assert exercices
+    inputs = exercices["inputs"]
+    targets = exercices["outputs"]
+    tolerances = exercices["tolerance"]
 
     x = []
     y = []
@@ -226,13 +228,13 @@ class Network:
     axs[0].set_title(f"Trained for {len(self.errors)} repetitions, with {self.learning_rate} learning rate.")
     axs[0].grid(True)
 
-    x = [x[0] for x in self.training["inputs"]]
-    y = [y[0] for y in self.training["outputs"]]
-    axs[0].plot(x, y, label='target')
+    if self.exercices:
+      x = [x[0] for x in self.exercices["inputs"]]
+      y = [y[0] for y in self.exercices["outputs"]]
+      axs[0].plot(x, y, label='target')
 
     x = [i/10 for i in range(-10, 250)]
     y = [self.predict([i]) for i in x]
-    print(max(y))
     axs[0].plot(x, y, label='predicted')
 
     axs[0].legend()
