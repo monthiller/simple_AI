@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import math
 import random
 import numpy as np
-from . import activation
+from . import activations
 
 dot = np.dot
 
