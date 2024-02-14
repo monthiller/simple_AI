@@ -1,23 +1,17 @@
 # Imports
-from scipy.special import expit
 import matplotlib.pyplot as plt
 import math
 import random
 import numpy as np
+from . import activation
 
 dot = np.dot
-sigmoid  = expit
 
-def d_sigmoid( x):
-  return sigmoid(x)*(1-sigmoid(x))
 
 # Neuron class
 class Neuron:
   _activations = {
-    "sigmoid": {
-      "function": sigmoid,
-      "derivative": d_sigmoid
-    }
+    "sigmoid": activation.sigmoid
   }
   def __init__(self, name, **kwargs):
     self.name = name
@@ -30,9 +24,7 @@ class Neuron:
     self.predicted = None
 
     activation = kwargs["activation"]
-    self.activation_name = activation
-    self.activation = self._activations[activation]["function"]
-    self.d_activation = self._activations[activation]["derivative"]
+    self.activation = self._activations[activation]
 
   def __repr__(self):
     return str(self.name)
@@ -74,7 +66,7 @@ class Neuron:
 
     a = self.linear()
 
-    b = self.d_activation(a)
+    b = self.activation.deriv(a)
 
     c = self.da_w(neuron,i)
 
@@ -99,7 +91,7 @@ class Neuron:
 
   def dp_b(self, neuron):
       a = self.linear()
-      b = self.d_activation(a)
+      b = self.activation.deriv(a)
       c = self.da_b(neuron)
       return b*c
 
@@ -142,7 +134,7 @@ class Neuron:
           self.inputs.append(neuron.predict())
 
     value = self.linear()
-    return self.activation(value)
+    return self.activation.calc(value)
 
   def plot(self):
     x = list(i/10 for i in range(-100, 300))
