@@ -6,6 +6,7 @@ import random
 import numpy as np
 from scipy.special import expit
 import networkx as nx
+from copy import deepcopy
 
 class Network:
   def __init__(self, name, **kwargs):
@@ -61,25 +62,47 @@ class Network:
       return
     self._neuron_dict[neuron.name] = neuron
 
-  def new(self):
-    copy = Network()
-    copy_neurons = []
+  def as_dict(self):
+    neurons = []
     for neuron in self.neurons:
-      _neuron = Neuron(name=neuron.name)
-      copy.add_neuron(_neuron)
+      neuron_params = {
+            "name": neuron.name,
+            "weights": [1],
+            "bias": 0,
+            "activation":neuron.activation,
+            "derivative activation":neuron.d_activation,
+        }
+      neurons.append(neuron_params)
 
+    inputs = []
     for neuron in self.input_layer:
-      copy.add_input(copy[neuron.name])
+      inputs.append(neuron.name)
 
+    outputs = []
     for neuron in self.output_layer:
-      copy.add_output(copy[neuron.name])
+      outputs.append(neuron.name)
 
+    connections = []
     for neuron1, neuron2 in self.connections:
-      copy.connect(
-          copy[neuron1.name],
-          copy[neuron2.name]
+      connections.append(
+        (
+          neuron1.name,
+          neuron2.name,
           )
+      )
+    data = {
+        "neurons": neurons,
+        "inputs":inputs,
+        "outputs":outputs,
+        "connections":connections,
+        "exercices": deepcopy(self.exercices),
+    }
+    return data
 
+  def new(self, name):
+    params = self.as_dic()
+    params["name"] = name   
+    copy = Network(**params)
     return copy
 
   def copy(self):
