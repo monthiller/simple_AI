@@ -69,7 +69,7 @@ class Network:
             "name": neuron.name,
             "weights": [1],
             "bias": 0,
-            "activation":neuron.activation_name,
+            "activation":neuron.activation.name,
         }
       neurons.append(neuron_params)
 
