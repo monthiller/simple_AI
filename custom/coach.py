@@ -93,6 +93,7 @@ class Coach:
       # self.team.sort(key=lambda network: network.errors[-1])
 
       if self.first:
+        print(f"A solution was found after {i+1} selections!")
         self.sessions_to_tolerance = i
         break
 
@@ -103,7 +104,6 @@ class Coach:
 
   def plot(self):
     if self.first:
-      print(f"A solution was found after {i+1} selections!")
       print(f"Solution was trained for {len(self.first.errors)} exercice sessions of {self.sessions_size} repetitions.")
       print(f"Solution has a learning rate of {self.first.learning_rate}.")
     
