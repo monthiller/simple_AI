@@ -30,6 +30,7 @@ class Neuron:
     self.predicted = None
 
     activation = kwargs["activation"]
+    self.activation_name = activation
     self.activation = self._activations[activation]["function"]
     self.d_activation = self._activations[activation]["derivative"]
 
