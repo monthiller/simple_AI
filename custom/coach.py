@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from .network import Network
 
 class Coach:
   def __init__(self,name, **kwargs):
