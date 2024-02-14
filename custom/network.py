@@ -255,26 +255,20 @@ class Network:
     for neuron1, neuron2 in self.connections:
         G.add_edge(neuron1.name, neuron2.name)
 
-    # Create a position dictionary for nodes
-    pos = {}
-
-    # Assign positions for input layer nodes on the left
-    input_layer_nodes = self.input_layer
-    y_position = 0
-    for neuron in input_layer_nodes:
-        pos[neuron.name] = (0, y_position)
-        y_position += 1
-
-    # Assign positions for other neurons
-    other_neurons = [neuron for neuron in self.neurons if neuron not in input_layer_nodes]
-    num_other_neurons = len(other_neurons)
-    y_position = num_other_neurons // 2
-    for neuron in other_neurons:
-        pos[neuron.name] = (1, y_position)
-        y_position -= 1
+    columns = {}
+    for neuron in self.neurons:
+      if neuron.position in columns:
+        columns[neuron.position].append(neuron.name)
+        continue
+      columns[neuron.position] = [neuron.name]
+    
+    positions = {}
+    for position, column in columns.items():
+      for i, name in enumerate(column):
+        positions[name] = (position, i)
 
     # Draw the network
     plt.figure(figsize=(12, 8))
-    nx.draw(G, pos, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
+    nx.draw(G, positions, with_labels=True, node_size=1500, node_color="skyblue", font_size=12, arrows=True)
     plt.title("Neural Network Architecture")
     plt.show()
