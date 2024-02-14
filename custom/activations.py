@@ -4,6 +4,7 @@ class ActivationInterface:
     
   def calc(self, values):
     raise NotImplementedError
+    
   def deriv(self, values):
     raise NotImplementedError
     
@@ -14,6 +15,6 @@ class Sigmoid(ActivationInterface):
   def calc(values):
     return expit(values)
 
-  @staticmethod
-  def deriv( values):
+  
+  def deriv(self, values):
     return self.calc(x)*(1-self.calc(x))
