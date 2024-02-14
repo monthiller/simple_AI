@@ -51,6 +51,13 @@ class Neuron:
         neurons.update(neuron.input_connections)
     return neurons
 
+  @property
+  def position(self):
+    """Define the layer position in the network."""
+    if not self.input_connections:
+      return 0    
+    return max(n.position for n in self.input_connections) + 1
+
   def dp_w(self, neuron, i,):
 
     a = self.linear()
