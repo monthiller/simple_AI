@@ -100,7 +100,7 @@ class Network:
     return data
 
   def new(self, name):
-    params = self.as_dic()
+    params = self.as_dict()
     params["name"] = name   
     copy = Network(**params)
     return copy
