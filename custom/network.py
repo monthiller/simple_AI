@@ -234,7 +234,6 @@ class Network:
 
     if all(achieved):
       self.ready = True
-      print(f"Tolerance achieved with {len(self.errors)} total sessions!")
 
   def random_fit(self, seed=None):
     if seed:
