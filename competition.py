@@ -1,4 +1,9 @@
+import custom.coach
+
 class Competition:
+  coach_classes = {
+    "custom": custom.coach.Coach
+  }
   def __init__(self, **kwargs):
     self.deadline = kwargs["deadline"]
     self.coachs = []
@@ -6,7 +11,9 @@ class Competition:
   
   def _init_coachs(self, *args):
     for params in args:
-      coach = Coach(**params)
+      coach_class = args["coach_class"]
+      coach_class = self.coach_classes[param[coach_class]]
+      coach = coach_class(**params)
       self.coachs.append(coach)
 
   def compete(self):
