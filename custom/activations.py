@@ -55,12 +55,11 @@ class ReLU(ActivationInterface):
 class LeakyReLU(ActivationInterface):  
   def __init__(self, alpha=0.01):
     self._name = "leaky_relu"
-    self._alpha = alpha
+    self._alpha = alpha 
   
-  @staticmethod
-  def calc(x):
+  def calc(self, x):
     return max(self._alpha*x, x)
 
-  @staticmethod
-  def deriv(x):
+  
+  def deriv(self. x):
     return 1 if x > 0 else alpha
