@@ -32,22 +32,10 @@ class Neuron:
 
   @property
   def weights(self):
-    print(f"Accessing {self._weights=}")
-    import inspect
-    frame = inspect.currentframe()
-    caller_frame = frame.f_back
-    caller_function_name = caller_frame.f_code.co_name
-    print(f"The property 'my_property' is called from function: {caller_function_name}")
     return self._weights
 
   @weights.setter
   def weights(self, value):
-    print(f"Setting {self._weights=} to {value=}.")
-    import inspect
-    frame = inspect.currentframe()
-    caller_frame = frame.f_back
-    caller_function_name = caller_frame.f_code.co_name
-    print(f"The property 'my_property' is called from function: {caller_function_name}")
     self._weights = value
 
   def __repr__(self):
@@ -110,7 +98,7 @@ class Neuron:
     previous_errors = []
     for j in paths:
       previous_neuron = self.input_connections[j]
-      previous_errors.append(self._w[j] * previous_neuron.dp_w(neuron, i))
+      previous_errors.append(self._weights[j] * previous_neuron.dp_w(neuron, i))
     return sum(previous_errors)
 
   def dp_b(self, neuron):
@@ -133,7 +121,7 @@ class Neuron:
     previous_errors = []
     for j in paths:
       previous_neuron = self.input_connections[j]
-      previous_errors.append(self._w[j] * previous_neuron.dp_b(neuron))
+      previous_errors.append(self._weights[j] * previous_neuron.dp_b(neuron))
 
     return sum(previous_errors)
 
