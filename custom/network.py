@@ -148,7 +148,7 @@ class Network:
     assert neuron2 in self.neurons
     neuron1.output_connections.append(neuron2)
     neuron2.input_connections.append(neuron1)
-    neuron2.weights.append(1)
+    # neuron2.weights.append(1)
     self.neurons.add(neuron1)
     self.connections.append((neuron1, neuron2))
 
