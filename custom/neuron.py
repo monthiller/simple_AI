@@ -141,7 +141,7 @@ class Neuron:
     return self.activation.calc(value)
 
   def plot(self):
-    x = list(i/10 for i in range(-100, 300))
+    x = list(i/10 for i in range(-300, 300))
     y = []
     for i in x:
       y.append(self.predict(inputs=[i]))
