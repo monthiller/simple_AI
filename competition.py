@@ -1,4 +1,5 @@
 import custom.coach
+from time import time
 
 class Competition:
   coach_classes = {
