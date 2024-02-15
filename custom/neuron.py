@@ -33,11 +33,21 @@ class Neuron:
   @property
   def weights(self):
     print(f"Accessing {self._weights=}")
+    import inspect
+    frame = inspect.currentframe()
+    caller_frame = frame.f_back
+    caller_function_name = caller_frame.f_code.co_name
+    print(f"The property 'my_property' is called from function: {caller_function_name}")
     return self._weights
 
   @weights.setter
   def weights(self, value):
     print(f"Setting {self._weights=} to {value=}.")
+    import inspect
+    frame = inspect.currentframe()
+    caller_frame = frame.f_back
+    caller_function_name = caller_frame.f_code.co_name
+    print(f"The property 'my_property' is called from function: {caller_function_name}")
     self._weights = value
 
   def __repr__(self):
