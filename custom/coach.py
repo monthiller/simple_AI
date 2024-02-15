@@ -66,6 +66,9 @@ class Coach:
       self.team.append(network)
   
   def train(self):
+    for _ in self.train_and_report():
+      pass
+    comment = """
     random.seed(self.seed)
     repetitions = 10
     number_of_selections = self.number_of_selections
@@ -101,8 +104,45 @@ class Coach:
         self.team.sort(key=lambda network: network.errors[-1])
         self.sessions_to_tolerance = i
         break
+      """
 
-    # self.team.sort(key=lambda network: len(network.errors))
+  def train_and_report(self):
+    random.seed(self.seed)
+    repetitions = 10
+    number_of_selections = self.number_of_selections
+    for i in range(number_of_selections):
+      self.build_team()
+      failed = set()
+      for network in self.team:
+        try:
+          network.train(
+              exercices=self.exercices,
+              repetitions=repetitions)
+          network.test(
+              self.check
+          )
+        except OverflowError:
+          failed.add(network)
+          pass
+
+        if network.ready:
+          self.first = network
+          self.team.remove(network)
+          break
+        yield
+
+      assert len(failed)<len(self.team)
+      for network in failed:
+        self.team.remove(network)
+
+      # self.team.sort(key=lambda network: network.errors[-1])
+
+      if self.first:
+        print(f"A solution was found after {i+1} selections!")
+        self.team = [x for x in self.team if x.errors]
+        self.team.sort(key=lambda network: network.errors[-1])
+        self.sessions_to_tolerance = i
+        break
   
   def get_podium(self):
     if self.first:
