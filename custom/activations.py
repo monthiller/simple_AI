@@ -62,4 +62,4 @@ class LeakyReLU(ActivationInterface):
 
   
   def deriv(self, x):
-    return 1 if x > 0 else self.alpha
+    return 1 if x > 0 else self._alpha
