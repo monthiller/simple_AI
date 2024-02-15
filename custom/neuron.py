@@ -132,9 +132,9 @@ class Neuron:
       self.inputs = inputs
     else:
       if self.inputs is None:
-        assert self.previous_layer
+        assert self.input_connections
         self.inputs = []
-        for neuron in self.previous_layer:
+        for neuron in self.input_connections:
           self.inputs.append(neuron.predict())
 
     value = self.linear()
