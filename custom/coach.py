@@ -114,6 +114,8 @@ class Coach:
     if self.first:
       print(f"Solution was trained for {len(self.first.errors)} exercice sessions of {self.sessions_size} repetitions.")
       print(f"Solution has a learning rate of {self.first.learning_rate}.")
+    else:
+      print("Not solutions was found!")
     
     podium = self.get_podium()
     for place, network in enumerate(podium):
