@@ -5,7 +5,7 @@ import random
 class Coach:
   def __init__(self,name, **kwargs):
     self.name = name
-    self.seed = kwargs.get("seed", 1)
+    self.seed = kwargs["seed"]
     self.profile = Network(name="profile", **kwargs["profile"])
     self.dataset = kwargs["dataset"]
     self.number_of_selections = kwargs["number_of_selections"]
