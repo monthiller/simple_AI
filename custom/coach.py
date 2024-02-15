@@ -97,13 +97,18 @@ class Coach:
 
       if self.first:
         print(f"A solution was found after {i+1} selections!")
+        self.team.remove(self.first)
+        self.team = [x for x in self.team if self.is_good_candidate(x, canditate_number)]
+        self.team.sort(key=lambda network: network.errors[-1])
         self.sessions_to_tolerance = i
         break
 
-    self.team.sort(key=lambda network: len(network.errors))
+    # self.team.sort(key=lambda network: len(network.errors))
   
   def get_podium(self):
-    return [self.first] + self.team[:2]
+    if self.first:
+      return [self.first] + self.team[:2]
+    return self.team[:3]
 
   def plot(self):
     print(f"Report for {self.name}.")
