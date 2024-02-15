@@ -61,5 +61,5 @@ class LeakyReLU(ActivationInterface):
     return max(self._alpha*x, x)
 
   
-  def deriv(self. x):
+  def deriv(self, x):
     return 1 if x > 0 else alpha
