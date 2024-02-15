@@ -23,12 +23,22 @@ class Neuron:
     self.output_connections = []
     self.bias = kwargs["bias"]
     self.inputs = None
-    self.weights = kwargs["weights"]
+    self._weights = kwargs["weights"]
     self.correct = None
     self.predicted = None
 
     activation = kwargs["activation"]
     self.activation = self._activations[activation]
+
+  @property
+  def weights(self):
+    print(f"Accessing {self._weights=}")
+    return self._weights
+
+  @weights.setter
+  def weights(self, value):
+    print(f"Setting {self._weights=} to {value=}.")
+    self._weights = value
 
   def __repr__(self):
     return str(self.name)
