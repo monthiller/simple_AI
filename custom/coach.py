@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 from .network import Network
+import random
 
 class Coach:
   def __init__(self,name, **kwargs):
     self.name = name
+    self.seed = kwargs.get("seed", 1)
     self.profile = Network(name="profile", **kwargs["profile"])
     self.dataset = kwargs["dataset"]
     self.number_of_selections = kwargs["number_of_selections"]
@@ -64,6 +66,7 @@ class Coach:
       self.team.append(network)
   
   def train(self):
+    random.seed(self.seed)
     repetitions = 10
     number_of_selections = self.number_of_selections
     for i in range(number_of_selections):
