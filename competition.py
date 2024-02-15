@@ -11,7 +11,7 @@ class Competition:
   
   def _init_coachs(self, *args):
     for params in args:
-      coach_class = args["coach_class"]
+      coach_class = params["coach_class"]
       coach_class = self.coach_classes[param[coach_class]]
       coach = coach_class(**params)
       self.coachs.append(coach)
