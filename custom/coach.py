@@ -18,6 +18,12 @@ class Coach:
     self.check = {}
     self.split_dataset(**kwargs["split_dataset"])
     self.sessions_to_tolerance = None
+
+  @property
+  def min_error(self):
+    if not self.errors:
+      return 10000000
+    return min(self.errors)
   
   def split_dataset(self, pick_1_out_of, ):      
     self.exercices.clear()
