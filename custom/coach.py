@@ -21,9 +21,15 @@ class Coach:
 
   @property
   def min_error(self):
-    if not self.errors:
+    min_errors = []
+    for network in self.team:
+      if not network.errors:
+        continue
+      min_errors.append(min(network.errors))
+      
+    if not min_errors:
       return 10000000
-    return min(self.errors)
+    return min(min_errors)
   
   def split_dataset(self, pick_1_out_of, ):      
     self.exercices.clear()
