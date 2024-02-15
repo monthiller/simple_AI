@@ -1,7 +1,7 @@
 from scipy.special import expit
+import numpy as np
   
 class ActivationInterface:
-
   def __init__(self):
     self._name = None
 
@@ -10,20 +10,57 @@ class ActivationInterface:
     assert self._name is not None
     return self._name
     
-  def calc(self, values):
+  def calc(self, x):
     raise NotImplementedError
     
-  def deriv(self, values):
+  def deriv(self, x):
     raise NotImplementedError
     
-class Sigmoid(ActivationInterface):
-  
+class Sigmoid(ActivationInterface):  
   def __init__(self):
     self._name = "sigmoid"  
   
   @staticmethod
-  def calc(values):
-    return expit(values)
+  def calc(x):
+    return expit(x)
   
-  def deriv(self, values):
-    return self.calc(values)*(1-self.calc(values))
+  def deriv(self, x):
+    return self.calc(x)*(1-self.calc(x))
+
+
+class Tanh(ActivationInterface):  
+  def __init__(self):
+    self._name = "tanh"  
+  
+  @staticmethod
+  def calc(x):
+    return np.tanh(x)
+
+  @staticmethod
+  def deriv(x):
+    return 1 - np.tanh(x)**2
+
+class ReLU(ActivationInterface):  
+  def __init__(self):
+    self._name = "relu"  
+  
+  @staticmethod
+  def calc(x):
+    return max(0, x)
+
+  @staticmethod
+  def deriv(x):
+    return 1 if x > 0 else 0
+
+class LeakyReLU(ActivationInterface):  
+  def __init__(self, alpha=0.01):
+    self._name = "leaky_relu"
+    self._alpha = alpha
+  
+  @staticmethod
+  def calc(x):
+    return max(self._alpha*x, x)
+
+  @staticmethod
+  def deriv(x):
+    return 1 if x > 0 else alpha
