@@ -97,7 +97,6 @@ class Coach:
 
       if self.first:
         print(f"A solution was found after {i+1} selections!")
-        self.team.remove(self.first)
         self.team = [x for x in self.team if self.is_good_candidate(x, canditate_number)]
         self.team.sort(key=lambda network: network.errors[-1])
         self.sessions_to_tolerance = i
