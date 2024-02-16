@@ -82,7 +82,7 @@ class Coach:
       pass
     comment = """
     random.seed(self.seed)
-    repetitions = 10
+    repetitions = self.sessions_size
     number_of_selections = self.number_of_selections
     for i in range(number_of_selections):
       self.build_team()
